@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
 import { registerUser } from "../api/auth";
 
-export default function Register({ setToken }) {
+import useAuth from "../hooks/useAuth";
+
+export default function Register() {
+  const { setToken } = useAuth();
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -29,7 +33,7 @@ export default function Register({ setToken }) {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           type="text"
-          placeholder="email"
+          placeholder="password"
         />
         <button type="submit">Register</button>
       </form>
