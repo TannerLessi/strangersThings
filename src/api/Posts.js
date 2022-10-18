@@ -7,7 +7,10 @@ export const fetchAllPosts = async () => {
 };
 
 export const fetchPostById = async (id) => {
-  const response = await fetch(`${APIURL}posts/${id}`);
+  const response = await fetch(`${APIURL}posts`);
   const result = await response.json();
-  return result.data.post;
+  const singlePost = result.data.posts.filter((element)=>{
+    return element._id==id
+  })[0]
+  return singlePost;
 };

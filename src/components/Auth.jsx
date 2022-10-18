@@ -13,11 +13,16 @@ export default function Auth({ setToken }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  const [error, setError] = useState("");
+
+
+
   return (
     <div>
       <form
         onSubmit={async (event) => {
           event.preventDefault();
+          setError("")
           let result;
           if (method === "register") {
             result = await registerUser(username, password);
@@ -27,12 +32,20 @@ export default function Auth({ setToken }) {
           console.log({ username, password });
           // hit the register api route
           console.log(result);
+          //check if there is an error from the api
+          if (result.success) {
           const token = result.data.token;
           localStorage.setItem("token", token);
           setToken(token);
+          setPassword("");
+          setUsername("");
           navigate("/");
+        } else {
+          setError(result.error.message);
+        }
         }}
       >
+        {error && <h5>{error}</h5>}
         <input
           value={username}
           onChange={(e) => setUsername(e.target.value)}

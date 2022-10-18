@@ -15,7 +15,7 @@ function App() {
       <Routes>
         <Route path="/auth/:method" element={<Auth setToken={setToken} />} />
         <Route path="/" element={<Posts />} />
-        <Route path="/Posts/:postId" element={<SinglePost />} />
+        <Route path="/posts/:postId" element={<SinglePost />} />
       </Routes>
     </div>
   );

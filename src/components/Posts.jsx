@@ -25,7 +25,7 @@ function Posts() {
         return (
           <div key={post._id}>
             <h3>
-              <Link to={`/${post._id}`}>{post.title}</Link>{" "}
+              <Link to={`/posts/${post._id}`}>{post.title}</Link>{" "}
             </h3>
             <div>price: {post.price}</div>
           </div>

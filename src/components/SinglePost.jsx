@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { useState, useEffect } from "react";
 
@@ -21,7 +21,18 @@ function SinglePost() {
 
   return (
     <div>
-      <h3>{singlePost.title}</h3>
+     
+    
+         <div>
+          <h3>{singlePost.title}</h3>
+          <p>description: {singlePost.description}</p>
+          <p>location: {singlePost.location}</p>
+          <p>price: {singlePost.price}</p>
+          <p></p>
+          </div>
+        
+       
+      
     </div>
   );
 }
