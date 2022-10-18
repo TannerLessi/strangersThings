@@ -21,18 +21,13 @@ function SinglePost() {
 
   return (
     <div>
-     
-    
-         <div>
-          <h3>{singlePost.title}</h3>
-          <p>description: {singlePost.description}</p>
-          <p>location: {singlePost.location}</p>
-          <p>price: {singlePost.price}</p>
-          <p></p>
-          </div>
-        
-       
-      
+      <div>
+        <h3>{singlePost.title}</h3>
+        <p>description: {singlePost.description}</p>
+        <p>location: {singlePost.location}</p>
+        <p>price: {singlePost.price}</p>
+        <p></p>
+      </div>
     </div>
   );
 }

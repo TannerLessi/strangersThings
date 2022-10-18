@@ -28,6 +28,9 @@ function Navbar({ user, setToken }) {
           </Nav.Item>
         </>
       ) : null}
+      <Nav.Item>
+        <Link to="/AddNewPost">New Post</Link>
+      </Nav.Item>
       <Link to="/Profile">Profile</Link>
       {user.username !== "Guest" ? (
         <Nav.Item>
