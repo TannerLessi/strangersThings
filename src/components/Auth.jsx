@@ -4,12 +4,11 @@ import { registerUser, loginUser } from "../api/auth";
 
 import { useParams } from "react-router-dom";
 
-import useAuth from "../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
-export default function Auth() {
+export default function Auth({ setToken }) {
+  const navigate = useNavigate();
   const { method } = useParams();
-
-  const { setToken } = useAuth();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -31,6 +30,7 @@ export default function Auth() {
           const token = result.data.token;
           localStorage.setItem("token", token);
           setToken(token);
+          navigate("/");
         }}
       >
         <input
