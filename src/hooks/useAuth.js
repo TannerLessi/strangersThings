@@ -6,18 +6,17 @@ export default function useAuth() {
   const [user, setUser] = useState({});
 
   useEffect(() => {
+    console.log("in the use Effect token", token);
     async function getMe() {
-      console.log("Token before fetch");
       const result = await fetchMe(token);
-      console.log(result);
       setUser(result.data);
     }
     if (token) {
       getMe();
+    } else {
+      setUser({ username: "Guest" });
     }
   }, [token]);
-
-  console.log("user currently is: ", user);
 
   return {
     token,

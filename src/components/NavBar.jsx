@@ -1,13 +1,46 @@
 import { Link } from "react-router-dom";
-
-function Navbar() {
+import Button from "react-bootstrap/Button";
+import Nav from "react-bootstrap/Nav";
+import useAuth from "../hooks/useAuth";
+function Navbar({ user, setToken }) {
   return (
-    <nav className="NavBar">
-      <Link to="/">Home</Link>
-      <Link to="/Register"> Register</Link>
-      <Link to="/Posts">Posts</Link>
+    <nav
+      className="NavBar"
+      style={{
+        width: "100vw",
+        display: "flex",
+        justifyContent: "space-around",
+        marginBottom: "2rem",
+      }}
+    >
+      <Nav.Item>Welcome, {user.username}</Nav.Item>
+      <Nav.Item>
+        <Link to="/">Home</Link>
+      </Nav.Item>
+      {user.username === "Guest" ? (
+        <>
+          {""}
+          <Nav.Item>
+            <Link to="/auth/register"> Register</Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Link to="/auth/login"> Login</Link>
+          </Nav.Item>
+        </>
+      ) : null}
       <Link to="/Profile">Profile</Link>
-      <Link to="/LogOut">Log Out</Link>
+      {user.username !== "Guest" ? (
+        <Nav.Item>
+          <Button
+            onClick={() => {
+              localStorage.removeItem("token");
+              setToken("");
+            }}
+          >
+            Log Out
+          </Button>
+        </Nav.Item>
+      ) : null}
     </nav>
   );
 }

@@ -1,9 +1,14 @@
 import { useState, useEffect } from "react";
-import { registerUser } from "../api/auth";
+
+import { registerUser, loginUser } from "../api/auth";
+
+import { useParams } from "react-router-dom";
 
 import useAuth from "../hooks/useAuth";
 
-export default function Register() {
+export default function Auth() {
+  const { method } = useParams();
+
   const { setToken } = useAuth();
 
   const [username, setUsername] = useState("");
@@ -14,9 +19,14 @@ export default function Register() {
       <form
         onSubmit={async (event) => {
           event.preventDefault();
+          let result;
+          if (method === "register") {
+            result = await registerUser(username, password);
+          } else {
+            result = await loginUser(username, password);
+          }
           console.log({ username, password });
           // hit the register api route
-          const result = await registerUser(username, password);
           console.log(result);
           const token = result.data.token;
           localStorage.setItem("token", token);
@@ -35,7 +45,9 @@ export default function Register() {
           type="text"
           placeholder="password"
         />
-        <button type="submit">Register</button>
+        <button type="submit">
+          {method === "register" ? "Register" : "Login"}
+        </button>
       </form>
     </div>
   );
