@@ -1,18 +1,11 @@
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Nav from "react-bootstrap/Nav";
+import styles from "../styles/NavBar.module.css";
 import useAuth from "../hooks/useAuth";
 function Navbar({ user, setToken }) {
   return (
-    <nav
-      className="NavBar"
-      style={{
-        width: "100vw",
-        display: "flex",
-        justifyContent: "space-around",
-        marginBottom: "2rem",
-      }}
-    >
+    <nav className={styles.Navbar}>
       <Nav.Item>Welcome, {user.username}</Nav.Item>
       <Nav.Item>
         <Link to="/">Home</Link>
