@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Nav from "react-bootstrap/Nav";
+import NavBar from "react-bootstrap/NavBar";
+import Container from "react-bootstrap/Container";
 import styles from "../styles/NavBar.module.css";
 import useAuth from "../hooks/useAuth";
 function Navbar({ user, setToken }) {

@@ -28,6 +28,7 @@ function Posts() {
               <Link to={`/posts/${post._id}`}>{post.title}</Link>{" "}
             </h3>
             <div>price: {post.price}</div>
+            <div>seller: {post.author.username}</div>
           </div>
         );
       })}

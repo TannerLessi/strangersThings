@@ -1,6 +1,6 @@
 .NavBar {
   display: "flex";
-  justify-content: "space-around";
+  justify-content: space-evenly;
   margin-bottom: "2rem";
   background-color: grey;
   flex-direction: row;
