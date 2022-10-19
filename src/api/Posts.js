@@ -15,19 +15,40 @@ export const fetchPostById = async (id) => {
   return singlePost;
 };
 
-export const createPost = async (title, description, price, location) => {
+export const createPost = async (
+  title,
+  description,
+  price,
+  location,
+  token
+) => {
   const response = await fetch(`${APIURL}posts`, {
     method: "Post",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({
-      title,
-      description,
-      price,
-      location,
+      post: {
+        title,
+        description,
+        price,
+        location,
+      },
     }),
   });
   const result = await response.json;
+  return result;
+};
+
+export const deletePostById = async (id, token) => {
+  const response = await fetch(`${APIURL}posts/${id}`, {
+    method: "Delete",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const result = await response.json();
   return result;
 };

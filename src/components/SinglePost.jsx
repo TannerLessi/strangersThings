@@ -2,10 +2,14 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import { useState, useEffect } from "react";
 
-import { fetchPostById } from "../api/Posts";
+import { deletePostById, fetchPostById } from "../api/Posts";
+
+import useAuth from "../hooks/useAuth";
 
 function SinglePost() {
   const navigate = useNavigate();
+
+  const { token } = useAuth();
 
   const { postId } = useParams();
 
@@ -18,6 +22,10 @@ function SinglePost() {
     }
     getPostById();
   }, []);
+  async function deletePost() {
+    const result = await deletePostById(singlePost._id, token);
+    navigate("/");
+  }
 
   return (
     <div>
@@ -26,7 +34,7 @@ function SinglePost() {
         <p>description: {singlePost.description}</p>
         <p>location: {singlePost.location}</p>
         <p>price: {singlePost.price}</p>
-        <p></p>
+        <button onClick={deletePost}>Delete</button>
       </div>
     </div>
   );
