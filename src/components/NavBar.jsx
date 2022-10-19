@@ -1,13 +1,11 @@
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Nav from "react-bootstrap/Nav";
-import NavBar from "react-bootstrap/NavBar";
-import Container from "react-bootstrap/Container";
 import styles from "../styles/NavBar.module.css";
 import useAuth from "../hooks/useAuth";
 function Navbar({ user, setToken }) {
   return (
-    <nav className={styles.Navbar}>
+    <Nav className="justify-content-center">
       <Nav.Item>Welcome, {user.username}</Nav.Item>
       <Nav.Item>
         <Link to="/">Home</Link>
@@ -23,23 +21,26 @@ function Navbar({ user, setToken }) {
           </Nav.Item>
         </>
       ) : null}
-      <Nav.Item>
-        <Link to="/AddNewPost">New Post</Link>
-      </Nav.Item>
-      <Link to="/Profile">Profile</Link>
+
       {user.username !== "Guest" ? (
-        <Nav.Item>
-          <Button
-            onClick={() => {
-              localStorage.removeItem("token");
-              setToken("");
-            }}
-          >
-            Log Out
-          </Button>
-        </Nav.Item>
+        <>
+          <Nav.Item>
+            <Link to="/AddNewPost">Create New Post</Link>
+          </Nav.Item>
+          <Link to="/Profile">Profile</Link>
+          <Nav.Item>
+            <Button
+              onClick={() => {
+                localStorage.removeItem("token");
+                setToken("");
+              }}
+            >
+              Log Out
+            </Button>
+          </Nav.Item>
+        </>
       ) : null}
-    </nav>
+    </Nav>
   );
 }
 

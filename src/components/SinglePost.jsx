@@ -2,9 +2,10 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import { useState, useEffect } from "react";
 
-import { deletePostById, fetchPostById } from "../api/Posts";
+import { deletePostById, fetchPostById, fetchMessageById } from "../api/Posts";
 
 import useAuth from "../hooks/useAuth";
+import { Placeholder } from "react-bootstrap";
 
 function SinglePost() {
   const navigate = useNavigate();
@@ -14,6 +15,7 @@ function SinglePost() {
   const { postId } = useParams();
 
   const [singlePost, setSinglePost] = useState({});
+  const [content, setContent] = useState();
 
   useEffect(() => {
     async function getPostById() {
@@ -35,6 +37,27 @@ function SinglePost() {
         <p>location: {singlePost.location}</p>
         <p>price: {singlePost.price}</p>
         <button onClick={deletePost}>Delete</button>
+        <form
+          onSubmit={async (e) => {
+            e.preventDefault();
+            const result = await fetchMessageById(
+              singlePost._id,
+              token,
+              content
+            );
+            navigate("/");
+          }}
+        >
+          <input
+            placeholder="message"
+            type="text"
+            value={content}
+            onChange={(e) => {
+              setContent(e.target.value);
+            }}
+          ></input>
+          <button type="submit"> Send</button>
+        </form>
       </div>
     </div>
   );

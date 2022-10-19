@@ -1,3 +1,4 @@
+import { json } from "react-router-dom";
 import { APIURL, cohortName } from "./auth";
 
 export const fetchAllPosts = async () => {
@@ -48,6 +49,21 @@ export const deletePostById = async (id, token) => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
+  });
+  const result = await response.json();
+  return result;
+};
+
+export const fetchMessageById = async (content, id, token) => {
+  const response = await fetch(`${APIURL}posts/${id}/messages`, {
+    method: "Post",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      message: { content },
+    }),
   });
   const result = await response.json();
   return result;

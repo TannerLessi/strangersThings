@@ -6,6 +6,7 @@ import Posts from "./components/Posts";
 import { Routes, Route } from "react-router-dom";
 import SinglePost from "./components/SinglePost";
 import AddNewPost from "./components/AddNewPost";
+import Profile from "./components/Profile";
 function App() {
   const { setToken, user } = useAuth();
 
@@ -17,6 +18,7 @@ function App() {
         <Route path="/" element={<Posts />} />
         <Route path="/posts/:postId" element={<SinglePost />} />
         <Route path="/addNewPost" element={<AddNewPost />} />
+        <Route path="/profile" element={<Profile user={user} />} />
       </Routes>
     </div>
   );
