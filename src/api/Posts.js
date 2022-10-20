@@ -54,7 +54,8 @@ export const deletePostById = async (id, token) => {
   return result;
 };
 
-export const fetchMessageById = async (content, id, token) => {
+export const sendMessages = async (id, token, content) => {
+  console.log("ABOUT TO CREATE A MESSAGE");
   const response = await fetch(`${APIURL}posts/${id}/messages`, {
     method: "Post",
     headers: {

@@ -2,7 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import { useState, useEffect } from "react";
 
-import { deletePostById, fetchPostById, fetchMessageById } from "../api/Posts";
+import { deletePostById, fetchPostById, sendMessages } from "../api/Posts";
 
 import useAuth from "../hooks/useAuth";
 import { Placeholder } from "react-bootstrap";
@@ -10,11 +10,12 @@ import { Placeholder } from "react-bootstrap";
 function SinglePost() {
   const navigate = useNavigate();
 
-  const { token } = useAuth();
+  const { token, user } = useAuth();
 
   const { postId } = useParams();
 
   const [singlePost, setSinglePost] = useState({});
+
   const [content, setContent] = useState();
 
   useEffect(() => {
@@ -28,6 +29,10 @@ function SinglePost() {
     const result = await deletePostById(singlePost._id, token);
     navigate("/");
   }
+  async function createMsg() {
+    console.log("in createMsg");
+    const result = await sendMessages(singlePost._id, token, content);
+  }
 
   return (
     <div>
@@ -36,22 +41,24 @@ function SinglePost() {
         <p>description: {singlePost.description}</p>
         <p>location: {singlePost.location}</p>
         <p>price: {singlePost.price}</p>
-        <button onClick={deletePost}>Delete</button>
+        {
+          //* if the user is equals the auther id it will display the delete button
+        }
+        {user?._id === singlePost.author?._id && (
+          <button onClick={deletePost}>Delete</button>
+        )}
         <form
           onSubmit={async (e) => {
             e.preventDefault();
-            const result = await fetchMessageById(
-              singlePost._id,
-              token,
-              content
-            );
+            console.log("in onSubmit");
+            await createMsg();
             navigate("/");
           }}
         >
           <input
             placeholder="message"
             type="text"
-            value={content}
+            value={content || ""}
             onChange={(e) => {
               setContent(e.target.value);
             }}

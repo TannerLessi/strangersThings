@@ -16,6 +16,7 @@ export default function AddNewPost() {
   return (
     <div>
       <form
+        class="pure-form pure-form-stacked"
         onSubmit={async (e) => {
           e.preventDefault();
           const result = await createPost(
@@ -30,7 +31,7 @@ export default function AddNewPost() {
       >
         <h3>Create New Post!</h3>
         <div>
-          <label>Title: </label>
+          <label> </label>
           <input
             value={title}
             type="text"
@@ -39,7 +40,7 @@ export default function AddNewPost() {
               setTitle(e.target.value);
             }}
           />
-          <label>info: </label>
+          <label> </label>
           <input
             value={description}
             type="text"
@@ -48,7 +49,7 @@ export default function AddNewPost() {
               setDescription(e.target.value);
             }}
           />
-          <label>location: </label>
+          <label> </label>
           <input
             value={location}
             type="text"
@@ -57,7 +58,7 @@ export default function AddNewPost() {
               setLocation(e.target.value);
             }}
           />
-          <label>Price: </label>
+          <label> </label>
           <input
             value={price}
             type="text"
