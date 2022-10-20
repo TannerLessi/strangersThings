@@ -70,11 +70,18 @@ export const sendMessages = async (id, token, content) => {
   return result;
 };
 
-export const editPost = async (id, description, price, location, token) => {
+export const editPost = async (
+  id,
+  title,
+  description,
+  price,
+  location,
+  token
+) => {
   const response = await fetch(`${APIURL}posts/${id}`, {
-    method: "Patch",
+    method: "PATCH",
     headers: {
-      "Content-type": "Application/json",
+      "Content-type": "application/json",
       Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({

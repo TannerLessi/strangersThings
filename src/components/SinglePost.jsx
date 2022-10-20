@@ -20,7 +20,7 @@ function SinglePost() {
   const { postId } = useParams();
 
   const [singlePost, setSinglePost] = useState({});
-
+  const [showEdit, setShowEdit] = useState(false);
   const [content, setContent] = useState();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -43,14 +43,19 @@ function SinglePost() {
     const result = await sendMessages(singlePost._id, token, content);
   }
 
+  function displayEdit() {
+    setShowEdit(true);
+  }
   async function editPosts() {
     const result = await editPost(
       singlePost._id,
+      title,
       description,
       price,
       location,
       token
     );
+    setShowEdit(false);
   }
 
   return (
@@ -84,63 +89,67 @@ function SinglePost() {
         {user?._id === singlePost.author?._id && (
           <>
             <button onClick={deletePost}>Delete</button>
-            <button>Edit</button>
-            <div>
-              <form
-                class="pure-form pure-form-stacked"
-                onSubmit={async (e) => {
-                  e.preventDefault();
-                  const result = await editPost(
-                    title,
-                    description,
-                    price,
-                    location,
-                    token
-                  );
-                  navigate("/posts/:postId");
-                }}
-              >
-                <div>
-                  <label> </label>
-                  <input
-                    value={title}
-                    type="text"
-                    placeholder="title"
-                    onChange={(e) => {
-                      setTitle(e.target.value);
-                    }}
-                  />
-                  <label> </label>
-                  <input
-                    value={description}
-                    type="text"
-                    placeholder="description"
-                    onChange={(e) => {
-                      setDescription(e.target.value);
-                    }}
-                  />
-                  <label> </label>
-                  <input
-                    value={location}
-                    type="text"
-                    placeholder="location"
-                    onChange={(e) => {
-                      setLocation(e.target.value);
-                    }}
-                  />
-                  <label> </label>
-                  <input
-                    value={price}
-                    type="text"
-                    placeholder="price"
-                    onChange={(e) => {
-                      setPrice(e.target.value);
-                    }}
-                  />
-                  <button type="submit">Submit </button>
-                </div>
-              </form>
-            </div>
+            <button onClick={displayEdit}>Edit</button>
+            {showEdit === true ? (
+              <div>
+                <form
+                  class="pure-form pure-form-stacked"
+                  onSubmit={async (e) => {
+                    e.preventDefault();
+                    const result = await editPosts(
+                      title,
+                      description,
+                      price,
+                      location,
+                      token
+                    );
+                    navigate("/");
+                  }}
+                >
+                  <div>
+                    <label> </label>
+                    <input
+                      value={title}
+                      type="text"
+                      placeholder="title"
+                      onChange={(e) => {
+                        setTitle(e.target.value);
+                      }}
+                    />
+                    <label> </label>
+                    <input
+                      value={description}
+                      type="text"
+                      placeholder="description"
+                      onChange={(e) => {
+                        setDescription(e.target.value);
+                      }}
+                    />
+                    <label> </label>
+                    <input
+                      value={location}
+                      type="text"
+                      placeholder="location"
+                      onChange={(e) => {
+                        setLocation(e.target.value);
+                      }}
+                    />
+                    <label> </label>
+                    <input
+                      value={price}
+                      type="text"
+                      placeholder="price"
+                      onChange={(e) => {
+                        setPrice(e.target.value);
+                      }}
+                    />
+                    <button onClick={editPosts} type="submit">
+                      Submit{" "}
+                    </button>
+                  </div>
+                </form>
+              </div>
+            ) : null}
           </>
         )}
       </div>
