@@ -39,9 +39,9 @@ function Posts() {
       {postsToDisplay.map((post) => {
         return (
           <div key={post._id}>
-            <h3>
+            <h4>
               <Link to={`/posts/${post._id}`}>{post.title}</Link>{" "}
-            </h3>
+            </h4>
             <div>price: {post.price}</div>
             <div>seller: {post.author.username}</div>
           </div>

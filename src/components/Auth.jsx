@@ -6,6 +6,8 @@ import { useParams } from "react-router-dom";
 
 import { useNavigate } from "react-router-dom";
 
+import styles from "../styles/Auth.module.css";
+
 export default function Auth({ setToken }) {
   const navigate = useNavigate();
   const { method } = useParams();
@@ -16,7 +18,7 @@ export default function Auth({ setToken }) {
   const [error, setError] = useState("");
 
   return (
-    <div>
+    <div className={styles.container}>
       <form
         class="pure-form pure-form-stacked"
         onSubmit={async (event) => {
@@ -57,7 +59,7 @@ export default function Auth({ setToken }) {
           type="text"
           placeholder="password"
         />
-        <button type="submit">
+        <button className={styles.button} type="submit">
           {method === "register" ? "Register" : "Login"}
         </button>
       </form>

@@ -6,6 +6,8 @@ import { createPost } from "../api/Posts";
 
 import useAuth from "../hooks/useAuth";
 
+import styles from "../styles/AddNewPost.module.css";
+
 export default function AddNewPost() {
   const { token } = useAuth();
   const navigate = useNavigate();
@@ -14,7 +16,7 @@ export default function AddNewPost() {
   const [price, setPrice] = useState("");
   const [location, setLocation] = useState("");
   return (
-    <div>
+    <div className={styles.container}>
       <form
         class="pure-form pure-form-stacked"
         onSubmit={async (e) => {

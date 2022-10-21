@@ -2,6 +2,8 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import { useState, useEffect } from "react";
 
+import styles from "../styles/SinglePost.module.css";
+
 import {
   deletePostById,
   fetchPostById,
@@ -31,6 +33,10 @@ function SinglePost() {
     async function getPostById() {
       const data = await fetchPostById(postId);
       setSinglePost(data);
+      setTitle(singlePost.title);
+      setDescription(singlePost.description);
+      setPrice(singlePost.price);
+      setLocation(singlePost.location);
     }
     getPostById();
   }, []);
@@ -91,7 +97,7 @@ function SinglePost() {
             <button onClick={deletePost}>Delete</button>
             <button onClick={displayEdit}>Edit</button>
             {showEdit === true ? (
-              <div>
+              <div className={styles.container}>
                 <form
                   class="pure-form pure-form-stacked"
                   onSubmit={async (e) => {

@@ -1,9 +1,6 @@
-/* .NavBar {
-  width: "100vw";
-  display: "flex";
-  flex-direction: row;
-  justify-content: "flex-end";
-  margin-bottom: "2rem";
-  margin-right: "1rem";
-  background-color: rgb(219, 212, 212);
-} */
+.container {
+  display: flex;
+  justify-content: space-evenly;
+  margin-left: 10%;
+  margin-right: 10%;
+}
