@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 
 import { Link } from "react-router-dom";
 
+import styles from "../styles/Posts.module.css";
+
 function Posts() {
   const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
@@ -32,6 +34,7 @@ function Posts() {
   return (
     <div>
       <input
+        className={styles.searchbar}
         placeholder="search"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}

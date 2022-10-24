@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Nav from "react-bootstrap/Nav";
 import styles from "../styles/NavBar.module.css";
-import useAuth from "../hooks/useAuth";
+
 function Navbar({ user, setToken }) {
   return (
     <Nav className={styles.container}>
